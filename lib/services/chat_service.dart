@@ -151,17 +151,17 @@ class ChatService {
         final data = doc.data();
         final userDoc = await _firestore
             .collection('users')
-            .doc(data['userId'])
+            .doc(data['userId'] as String)
             .get();
         
         if (userDoc.exists) {
           final userData = userDoc.data()!;
           final user = User(
-            id: userData['id'],
-            name: userData['name'],
-            initials: userData['initials'],
-            avatarColor: userData['avatarColor'],
-            isOnline: userData['isOnline'] ?? false,
+            id: userData['id'] as String,
+            name: userData['name'] as String,
+            initials: userData['initials'] as String,
+            avatarColor: userData['avatarColor'] as String,
+            isOnline: (userData['isOnline'] as bool?) ?? false,
           );
 
           Message? lastMessage;
@@ -170,8 +170,8 @@ class ChatService {
             lastMessage = Message(
               id: 'last',
               chatId: doc.id,
-              senderId: lastMsgData['senderId'],
-              text: lastMsgData['text'],
+              senderId: lastMsgData['senderId'] as String,
+              text: lastMsgData['text'] as String,
               timestamp: (data['lastMessageTime'] as Timestamp).toDate(),
               isRead: true,
             );
@@ -201,12 +201,12 @@ class ChatService {
         final data = doc.data();
         return Message(
           id: doc.id,
-          chatId: data['chatId'],
-          senderId: data['senderId'],
-          text: data['text'],
+          chatId: data['chatId'] as String,
+          senderId: data['senderId'] as String,
+          text: data['text'] as String,
           timestamp: (data['timestamp'] as Timestamp).toDate(),
-          isRead: data['isRead'] ?? false,
-          imageUrl: data['imageUrl'],
+          isRead: (data['isRead'] as bool?) ?? false,
+          imageUrl: data['imageUrl'] as String?,
         );
       }).toList();
     });
@@ -242,18 +242,18 @@ class ChatService {
       final data = chatDoc.data()!;
       final userDoc = await _firestore
           .collection('users')
-          .doc(data['userId'])
+          .doc(data['userId'] as String)
           .get();
       
       if (!userDoc.exists) return null;
 
       final userData = userDoc.data()!;
       final user = User(
-        id: userData['id'],
-        name: userData['name'],
-        initials: userData['initials'],
-        avatarColor: userData['avatarColor'],
-        isOnline: userData['isOnline'] ?? false,
+        id: userData['id'] as String,
+        name: userData['name'] as String,
+        initials: userData['initials'] as String,
+        avatarColor: userData['avatarColor'] as String,
+        isOnline: (userData['isOnline'] as bool?) ?? false,
       );
 
       Message? lastMessage;
@@ -262,8 +262,8 @@ class ChatService {
         lastMessage = Message(
           id: 'last',
           chatId: chatId,
-          senderId: lastMsgData['senderId'],
-          text: lastMsgData['text'],
+          senderId: lastMsgData['senderId'] as String,
+          text: lastMsgData['text'] as String,
           timestamp: (data['lastMessageTime'] as Timestamp).toDate(),
           isRead: true,
         );
