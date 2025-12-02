@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import '../models/chat.dart';
 import '../models/message.dart';
 import '../models/user.dart';
@@ -16,6 +17,7 @@ class ChatService {
     if (_isInitialized) return;
 
     try {
+      await Firebase.initializeApp();
       final chatsSnapshot = await _firestore.collection('chats').get();
       
       if (chatsSnapshot.docs.isEmpty) {
@@ -24,7 +26,9 @@ class ChatService {
       
       _isInitialized = true;
     } catch (e) {
-      await _createInitialData();
+      try {
+        await _createInitialData();
+      } catch (_) {}
       _isInitialized = true;
     }
   }
