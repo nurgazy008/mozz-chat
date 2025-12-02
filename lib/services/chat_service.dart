@@ -65,7 +65,7 @@ class ChatService {
     final oldDate = DateTime(2022, 1, 12);
 
     for (var userData in users) {
-      await _firestore.collection('users').doc(userData['id']).set(userData);
+      await _firestore.collection('users').doc(userData['id'] as String).set(userData);
     }
 
     final chatsData = [
@@ -90,7 +90,7 @@ class ChatService {
     for (int i = 0; i < chatsData.length; i++) {
       final chatId = (i + 1).toString();
       await _firestore.collection('chats').doc(chatId).set({
-        'userId': chatsData[i]['userId'],
+        'userId': chatsData[i]['userId'] as String,
         'lastMessageTime': (chatsData[i]['lastMessageTime'] as DateTime),
       });
     }
@@ -121,11 +121,11 @@ class ChatService {
 
     for (var msgData in initialMessages) {
       await _firestore.collection('messages').add({
-        'chatId': msgData['chatId'],
-        'senderId': msgData['senderId'],
-        'text': msgData['text'],
+        'chatId': msgData['chatId'] as String,
+        'senderId': msgData['senderId'] as String,
+        'text': msgData['text'] as String,
         'timestamp': (msgData['timestamp'] as DateTime),
-        'isRead': msgData['isRead'],
+        'isRead': msgData['isRead'] as bool,
         'imageUrl': null,
       });
     }
