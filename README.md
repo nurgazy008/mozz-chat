@@ -1,16 +1,36 @@
-# mozz
+# Mozz Messenger
 
-A new Flutter project.
+Мессенджер на Flutter с Firebase Firestore.
 
-## Getting Started
+## Функционал
 
-This project is a starting point for a Flutter application.
+- Список чатов с поиском
+- Экран чата с сообщениями
+- Отправка сообщений в реальном времени
+- Форматирование дат и времени
+- Аватары с инициалами
+- Статус "В сети"
 
-A few resources to get you started if this is your first Flutter project:
+## Настройка Firebase
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Скачайте `google-services.json` из Firebase Console
+2. Поместите файл в `android/app/google-services.json`
+3. Включите Firestore Database в Firebase Console
+4. Установите правила безопасности (для теста можно разрешить все)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Подробная инструкция в `FIREBASE_SETUP.md`
+
+## Запуск
+
+```bash
+flutter pub get
+flutter run
+```
+
+## Сборка APK
+
+```bash
+flutter build apk --release
+```
+
+APK будет в `build/app/outputs/flutter-apk/app-release.apk`
